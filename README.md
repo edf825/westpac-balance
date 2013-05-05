@@ -1,7 +1,7 @@
 Introduction
 ------------
 
-A pair of quick and dirty scripts using Westpac NZ's undocumented `gobal` service, 'reverse engineered' [1] from their Cash Tank app. Does not store usernames or passwords.
+A pair of quick and dirty scripts for fetching your Westpac NZ balance using their undocumented `gobal` service, 'reverse engineered' [1] from their Cash Tank app. Does not store usernames or passwords.
 
 Usage
 -----
@@ -10,12 +10,12 @@ Running `gettoken.py` will ask you for your username and password, then you'll b
 
 The script will write the authentication token [3] to `~/.westpac-token`.
 
-Running the `updatebalance.py` script will write the balance of your nominated account to `~/.westpac-balance`.
+Running the `updatebalance.py` script will write the balance of your nominated account to `~/.westpac-balance`. I have a cron job which runs this script every hour.
 
 Security
 --------
 
-As far as I can tell, this service only lets you check the balance of one nominated account. There is no write access, you can't see multiple accounts (not with the same device ID anyway. Hmm...). Assuming I'm corrent about all this, it should be completely safe to be storing the authentication token in plain text.
+As far as I can tell, this service only lets you check the balance of one nominated account. There is no write access; you can't see multiple accounts (not with the same device ID anyway. Hmm...). Assuming I'm correct about all this, it should be completely safe to be storing the authentication token in plain text.
 
 Note
 ----
