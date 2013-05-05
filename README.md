@@ -12,6 +12,11 @@ The script will write the authentication token [3] to `~/.westpac-token`.
 
 Running the `updatebalance.py` script will write the balance of your nominated account to `~/.westpac-balance`.
 
+Security
+--------
+
+As far as I can tell, this service only lets you check the balance of one nominated account. There is no write access, you can't see multiple accounts (not with the same device ID anyway. Hmm...). Assuming I'm corrent about all this, it should be completely safe to be storing the authentication token in plain text.
+
 Note
 ----
 
