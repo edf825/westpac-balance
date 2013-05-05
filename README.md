@@ -3,6 +3,11 @@ Introduction
 
 A pair of quick and dirty scripts for fetching your Westpac NZ balance using their undocumented `gobal` service, 'reverse engineered' [1] from their Cash Tank app. Does not store usernames or passwords.
 
+Dependencies
+------------
+
+Requires the `requests` package. A very pretty HTTP API. I recommend checking it out if you haven't yet.
+
 Usage
 -----
 
