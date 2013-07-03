@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from getpass import getpass
-from sys import stdin, exit
+from sys import exit
 from time import time
 import os
 import requests
@@ -70,43 +70,28 @@ def register(user, passwd, num):
     return
 
   token = regroot[0].text
-  query = "{}.xml?deviceId={}&deviceNickname={}&devicePlatform={}&deviceOS={}&appVersion={}".format(token, deviceid, devicename, deviceplatform, deviceos, appversion)
-
-# Not sure why the app does this; I assume to acknowledge having received the token
+  query = "{}.xml?deviceId={}&deviceNickname={}&devicePlatform={}&deviceOS={}&appVersion={}"
+  
   requests.get(path + token)
 
-  return query
+  return query.format(token, deviceid, devicename, deviceplatform, deviceos, appversion)
 
 
-print "Username: ",
-user = stdin.readline()
+user = raw_input("Username: ")
 passwd = getpass("Password: ")
 
 accounts = getAccountsList(user, passwd)
 
-if len(accounts) == 0:
+if not accounts:
   print "Could not retreive accounts"
   exit(1)
 
-print
+for account in accounts:
+  print '{}: {} {}'.format(account['nickName'], account['availableBalance'], account['balance'])
 
-for i in range(0, len(accounts)):
-  print "{:<2} {:<20} {:>10} {:>10}".format(i + 1, accounts[i]['nickName'], accounts[i]['availableBalance'], accounts[i]['balance'])
-
-print
-print "Choose an account [1]:"
-
-try:
-  acct = int(stdin.readline()) - 1
-except:
-  acct = 1
-
+acct = int(raw_input('Choose an account [0-{}]: '.format(len(accounts))))
 token = register(user, passwd, accounts[acct]['productNumber'])
 
-try:
-  f = open(tokenpath, "w")
-  f.write(token)
-  f.close()
-  print "Success!"
-except:
-  print "File write error"
+if token:
+  with open(tokenpath, 'w') as f:
+    f.write(token)
